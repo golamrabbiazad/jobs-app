@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '@styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Jobs App</title>
-        <meta name="description" content="Find your dream jobs." />
+        <meta name="description" content="Find and Apply your dream jobs." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
