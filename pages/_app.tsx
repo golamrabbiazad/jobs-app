@@ -1,20 +1,20 @@
-import Head from 'next/head'
+import { NextPage } from 'next'
+import { ReactElement, ReactNode } from 'react'
 import type { AppProps } from 'next/app'
 
 import AppProvider from '@providers/app'
 
-export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <>
-      <Head>
-        <title>Jobs App</title>
-        <meta name="description" content="Find and Apply your dream jobs." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <AppProvider>
-        <Component {...pageProps} />
-      </AppProvider>
-    </>
-  )
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page)
+  const pageContent = getLayout(<Component {...pageProps} />)
+
+  return <AppProvider>{pageContent}</AppProvider>
 }

@@ -20,11 +20,10 @@
       "@components/*": ["components/*"],
       "@config/*": ["config/*"],
       "@features/*": ["features/*"],
-      "@hooks/*": ["hooks/*"],
+      "@layouts/*": ["layouts/*"],
       "@lib/*": ["lib/*"],
       "@prisma/*": ["prisma/*"],
-      "@providers/*": ["providers/*"],
-      "@styles/*": ["styles/*"]
+      "@providers/*": ["providers/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
