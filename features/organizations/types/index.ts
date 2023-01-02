@@ -1,4 +1,4 @@
-import type { Entity } from '../../../types'
+import type { Entity } from 'types'
 
 export type Organization = Entity & {
   adminId: string

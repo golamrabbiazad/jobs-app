@@ -23,7 +23,8 @@
       "@layouts/*": ["layouts/*"],
       "@lib/*": ["lib/*"],
       "@prisma/*": ["prisma/*"],
-      "@providers/*": ["providers/*"]
+      "@providers/*": ["providers/*"],
+      "@types": ["types"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
