@@ -6,6 +6,7 @@ import { ReactElement } from 'react'
 import PublicLayout from '@layouts/PublicLayout'
 import NotFound from '@components/NotFound'
 import { OrganizationInfo } from '@features/organizations'
+import { Job, JobList } from '@features/jobs/components'
 
 type PublicOrganizationPageProps = InferGetServerSidePropsType<
   typeof getServerSideProps
