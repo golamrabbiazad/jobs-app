@@ -1,5 +1,7 @@
 import { Heading, Stack } from '@chakra-ui/react'
+import { Content } from '@components/Content'
 
+import { InfoCard } from '@components/InfoCard'
 import { Organization } from '@features/organizations/types'
 
 export function OrganizationInfo({

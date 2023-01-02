@@ -9,6 +9,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react'
+import { Loading } from '@components/Loading'
 
 import { Entity } from '@types'
 

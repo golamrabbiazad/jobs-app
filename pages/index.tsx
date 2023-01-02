@@ -6,7 +6,7 @@ export default function Home() {
   const { colorMode, toggleColorMode } = useColorMode()
   return (
     <>
-      <Seo title="Jobs App" description="Find and Apply your dream jobs." />
+      <Seo title="Jobs App" info="Find and Apply your dream jobs." />
 
       <header>
         <Button onClick={toggleColorMode}>
