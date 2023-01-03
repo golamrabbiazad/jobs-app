@@ -1,1 +1,45 @@
-export default function Jobs() {}
+import { PlusSquareIcon } from '@chakra-ui/icons'
+import { Heading, HStack } from '@chakra-ui/react'
+import { Link } from '@components/Link'
+import { Loading } from '@components/Loading'
+import Seo from '@components/SEO'
+import { JobList } from '@features/jobs/components'
+import DashboardLayout from '@layouts/DashboardLayout'
+import { useJobs, useUser } from '@testing/testData'
+import { ReactElement } from 'react'
+
+export default function DashboardJobsPage() {
+  const user = useUser()
+
+  const jobs = useJobs(user.data?.organizationId ?? '')
+
+  if (jobs.isLoading) return <Loading />
+
+  if (!user.data) return null
+
+  return (
+    <>
+      <Seo title="Jobs" info="Awesome place for finding your dream jobs." />
+      <HStack mb="8" align="center" justifyContent="space-between">
+        <Heading>Jobs</Heading>
+        <Link
+          icon={<PlusSquareIcon />}
+          variant="solid"
+          href="/dashboard/jobs/create"
+        >
+          Create Job
+        </Link>
+      </HStack>
+      <JobList
+        jobs={jobs.data || []}
+        isLoading={jobs.isLoading}
+        organizationId={user.data.organizationId}
+        type="dashboard"
+      />
+    </>
+  )
+}
+
+DashboardJobsPage.getLayout = (page: ReactElement) => (
+  <DashboardLayout>{page}</DashboardLayout>
+)

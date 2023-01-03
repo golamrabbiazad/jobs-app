@@ -118,7 +118,9 @@ export const testData = {
 const delayedFn =
   <T, A extends any[]>(fn: (...args: A) => T, ms: number) =>
   (...args: A) => {
-    return new Promise((resolve) => setTimeout(() => resolve(fn(...args)), ms))
+    return new Promise<T>((resolve) =>
+      setTimeout(() => resolve(fn(...args)), ms)
+    )
   }
 
 export const getUser = delayedFn(() => testData.users[0], 0)
@@ -130,7 +132,7 @@ export const getOrganization = delayedFn(
 
 export const getJobs = delayedFn(
   (organizationId: string) =>
-    testData.jobs.filter((j) => j.organizationId === organizationId) || null,
+    testData.jobs.filter((j) => j.organizationId === organizationId),
   300
 )
 
@@ -139,7 +141,7 @@ export const getJob = delayedFn(
   300
 )
 
-const useTestData = <T,>(promise: Promise<T>) => {
+function useTestData<T>(promise: Promise<T>) {
   const [testData, setTestData] = useState<T | null>(null)
 
   useEffect(() => {
@@ -148,7 +150,10 @@ const useTestData = <T,>(promise: Promise<T>) => {
     }
   }, [promise, testData])
 
-  return { data: testData, isLoading: !testData }
+  return {
+    data: testData,
+    isLoading: !testData,
+  }
 }
 
 export const useUser = () => useTestData(getUser())
