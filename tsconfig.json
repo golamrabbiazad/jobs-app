@@ -25,7 +25,8 @@
       "@prisma/*": ["prisma/*"],
       "@providers/*": ["providers/*"],
       "@types": ["types"],
-      "@testing/*": ["testing/*"]
+      "@testing/*": ["testing/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
