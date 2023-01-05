@@ -22,7 +22,7 @@ const models = {
   job: {
     id: primaryKey(uid),
     position: String,
-    locaiton: String,
+    location: String,
     department: String,
     info: String,
     organizationId: String,
