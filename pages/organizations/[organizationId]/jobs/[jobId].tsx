@@ -1,12 +1,12 @@
 import { ReactElement } from 'react'
+import { Button, Stack } from '@chakra-ui/react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 
 import Seo from '@components/SEO'
-import { getJob, getOrganization } from '@testing/testData'
-import { Button, Stack } from '@chakra-ui/react'
-import { PublicJobInfo } from '@features/jobs/components/PublicJobInfo'
-import PublicLayout from '@layouts/PublicLayout'
 import NotFound from '@components/NotFound'
+import PublicLayout from '@layouts/PublicLayout'
+import { getJob, PublicJobInfo } from '@features/jobs'
+import { getOrganization } from '@features/organizations'
 
 type PublicJobPageProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -50,8 +50,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const jobId = params?.jobId as string
 
   const [organization, job] = await Promise.all([
-    getOrganization(organizationId).catch(() => null),
-    getJob(jobId).catch(() => null),
+    getOrganization({ organizationId }).catch(() => null),
+    getJob({ jobId }).catch(() => null),
   ])
   return {
     props: {

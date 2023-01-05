@@ -1,18 +1,17 @@
 import { ReactElement } from 'react'
+import { useRouter } from 'next/router'
 
 import Seo from '@components/SEO'
 import NotFound from '@components/NotFound'
-import DashboardLayout from '@layouts/DashboardLayout'
-import { useJob } from '@testing/testData'
-import { useRouter } from 'next/router'
 import { Loading } from '@components/Loading'
-import { DashboardJobInfo } from '@features/jobs/components/DashboardJobInfo'
+import DashboardLayout from '@layouts/DashboardLayout'
+import { DashboardJobInfo, useJob } from '@features/jobs'
 
 export default function DashboardJobPage() {
   const router = useRouter()
   const jobId = router.query.jobId as string
 
-  const job = useJob(jobId)
+  const job = useJob({ jobId })
 
   if (job.isLoading) {
     return <Loading />

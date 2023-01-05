@@ -1,5 +1,6 @@
-import { API_URL } from '@config/constants'
 import { rest } from 'msw'
+
+import { API_URL } from '@config/constants'
 import { db } from '../db'
 
 const singleOrganization = rest.get(
