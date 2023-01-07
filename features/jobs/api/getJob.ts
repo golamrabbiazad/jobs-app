@@ -3,18 +3,14 @@ import { useQuery } from '@tanstack/react-query'
 import { apiClient } from '@lib/apiClient'
 import { Job } from '../types'
 
-type GetJobOptions = {
-  jobId: string
-}
-
-export const getJob = ({ jobId }: GetJobOptions): Promise<Job> => {
+export const getJob = ({ jobId }: { jobId: string }): Promise<Job> => {
   return apiClient.get(`/jobs/${jobId}`)
 }
 
-export const useJob = ({ jobId }: GetJobOptions) => {
+export const useJob = ({ jobId }: { jobId: string }) => {
   const { data, isLoading } = useQuery({
-    queryFn: () => getJob({ jobId }),
     queryKey: ['jobs', jobId],
+    queryFn: () => getJob({ jobId }),
   })
 
   return {

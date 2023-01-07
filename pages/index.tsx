@@ -1,6 +1,7 @@
 import { Center, Heading, Text, VStack } from '@chakra-ui/react'
+
 import { Link } from '@components/Link'
-import Seo from '@components/SEO'
+import { Seo } from '@components/SEO'
 
 export default function Home() {
   return (

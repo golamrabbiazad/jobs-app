@@ -2,11 +2,12 @@ import { ReactElement } from 'react'
 import { Heading, HStack } from '@chakra-ui/react'
 import { PlusSquareIcon } from '@chakra-ui/icons'
 
-import Seo from '@components/SEO'
+import { Seo } from '@components/SEO'
 import { Link } from '@components/Link'
 import DashboardLayout from '@layouts/DashboardLayout'
+import { useUser } from '@features/auth'
 import { JobList, useJobs } from '@features/jobs'
-import { useUser } from '@features/auth/api'
+import { Loading } from '@components/Loading'
 
 export default function DashboardJobsPage() {
   const user = useUser()

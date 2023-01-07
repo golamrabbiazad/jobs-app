@@ -1,8 +1,8 @@
 import { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 
-import Seo from '@components/SEO'
-import NotFound from '@components/NotFound'
+import { Seo } from '@components/SEO'
+import { NotFound } from '@components/NotFound'
 import { Loading } from '@components/Loading'
 import DashboardLayout from '@layouts/DashboardLayout'
 import { DashboardJobInfo, useJob } from '@features/jobs'

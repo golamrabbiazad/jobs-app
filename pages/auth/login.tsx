@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 
-import Seo from '@components/SEO'
+import { Seo } from '@components/SEO'
 import AuthLayout from '@layouts/AuthLayout'
 import { LoginForm } from '@features/auth/components'
 
