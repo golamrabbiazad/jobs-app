@@ -1,6 +1,7 @@
-import { Box } from '@chakra-ui/react'
-import { Link } from '@components/Link'
 import { ReactNode } from 'react'
+import { Box } from '@chakra-ui/react'
+
+import { Link } from '@components/Link'
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
   return (
