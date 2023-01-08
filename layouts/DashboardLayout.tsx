@@ -33,8 +33,6 @@ function Navbar() {
     onSuccess: () => router.push('/auth/login'),
   })
 
-  console.log(logout)
-
   return (
     <Box as="nav" bg="primary" color="primaryAccent">
       <Container maxW="container.lg" size="3xl" py="3">

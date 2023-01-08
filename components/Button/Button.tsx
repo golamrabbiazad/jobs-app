@@ -31,9 +31,6 @@ export function Button({
   children,
   type = 'button',
   variant = 'solid',
-  isLoading,
-  isDisabled,
-  onClick,
   icon,
   ...props
 }: ButtonProps) {

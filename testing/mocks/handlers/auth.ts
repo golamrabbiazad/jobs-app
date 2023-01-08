@@ -22,7 +22,7 @@ const signinHandler = rest.post(
 
 const signoutHandler = rest.post(
   `${API_URL}/auth/logout`,
-  async (_req, res, ctx) => {
+  async (req, res, ctx) => {
     return res(
       ctx.delay(300),
       ctx.cookie(AUTH_COOKIE, '', {
