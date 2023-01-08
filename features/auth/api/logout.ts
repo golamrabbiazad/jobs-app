@@ -1,6 +1,7 @@
+import { useMutation } from '@tanstack/react-query'
+
 import { apiClient } from '@lib/apiClient'
 import { queryClient } from '@lib/reactQuery'
-import { useMutation } from '@tanstack/react-query'
 
 export const logout = () => {
   return apiClient.post('/auth/logout')
