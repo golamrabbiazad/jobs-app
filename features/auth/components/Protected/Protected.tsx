@@ -9,8 +9,6 @@ export function Protected({ children }: { children: ReactNode }) {
   const { replace, asPath } = useRouter()
   const user = useUser()
 
-  console.log(user)
-
   useEffect(() => {
     if (!user.data && !user.isLoading) {
       replace(`/auth/login?redirect=${asPath}`, undefined, { shallow: true })
