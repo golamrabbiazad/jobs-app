@@ -6,6 +6,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 
 import { theme } from '@config/theme'
 import { queryClient } from '@lib/reactQuery'
+import { Notifications } from '@components/Notifications'
 
 export default function AppProvider({ children }: { children: ReactNode }) {
   return (
@@ -15,6 +16,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         onError={console.error}
       >
         <GlobalStyle />
+        <Notifications />
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
           {children}

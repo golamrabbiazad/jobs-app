@@ -24,6 +24,7 @@
       "@lib/*": ["lib/*"],
       "@prisma/*": ["prisma/*"],
       "@providers/*": ["providers/*"],
+      "@stores/*": ["stores/*"],
       "@types": ["types"],
       "@testing/*": ["testing/*"],
       "@utils/*": ["utils/*"]
