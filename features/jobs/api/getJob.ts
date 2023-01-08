@@ -13,12 +13,9 @@ export const getJob = ({ jobId }: GetJobOptions): Promise<Job> => {
 
 export const useJob = ({ jobId }: GetJobOptions) => {
   const { data, isLoading } = useQuery({
-    queryFn: () => getJob({ jobId }),
     queryKey: ['jobs', jobId],
+    queryFn: () => getJob({ jobId }),
   })
 
-  return {
-    data,
-    isLoading,
-  }
+  return { data, isLoading }
 }

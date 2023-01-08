@@ -5,8 +5,7 @@ import { Box, Container, Flex, HStack } from '@chakra-ui/react'
 
 import { Link } from '@components/Link'
 import { Button } from '@components/Button'
-import { useLogout, useUser } from '@features/auth/api'
-import { Protected } from '@features/auth/components'
+import { useLogout, useUser, Protected } from '@features/auth'
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const user = useUser()
@@ -33,6 +32,8 @@ function Navbar() {
   const logout = useLogout({
     onSuccess: () => router.push('/auth/login'),
   })
+
+  console.log(logout)
 
   return (
     <Box as="nav" bg="primary" color="primaryAccent">

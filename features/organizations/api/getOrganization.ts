@@ -15,8 +15,8 @@ export const getOrganization = ({
 
 export const useOrganization = ({ organizationId }: GetOrganizationOptions) => {
   const { data, isLoading } = useQuery({
-    queryFn: () => getOrganization({ organizationId }),
     queryKey: ['organizations', organizationId],
+    queryFn: () => getOrganization({ organizationId }),
   })
 
   return { data, isLoading }

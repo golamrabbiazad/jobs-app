@@ -17,8 +17,8 @@ export const getJobs = ({ params }: GetJobsOptions): Promise<Job[]> => {
 
 export const useJobs = ({ params }: GetJobsOptions) => {
   const { data, isFetching, isFetched } = useQuery({
-    queryFn: () => getJobs({ params }),
     queryKey: ['jobs', params],
+    queryFn: () => getJobs({ params }),
     enabled: !!params.organizationId,
     initialData: [],
   })
