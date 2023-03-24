@@ -16,11 +16,11 @@ export default function DashboardJobsPage() {
     return <Loading />
   }
 
+  if (!user.data) return null
+  
   const jobs = useJobs({
     params: { organizationId: user.data?.organizationId },
   })
-
-  if (!user.data) return null
 
   return (
     <>
