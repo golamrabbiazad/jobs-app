@@ -11,16 +11,16 @@ import { JobList, useJobs } from '@features/jobs'
 
 export default function DashboardJobsPage() {
   const user = useUser()
+  
+  const jobs = useJobs({
+    params: { organizationId: user.data?.organizationId },
+  })
 
   if (user.isLoading) {
     return <Loading />
   }
 
   if (!user.data) return null
-  
-  const jobs = useJobs({
-    params: { organizationId: user.data?.organizationId },
-  })
 
   return (
     <>
