@@ -40,7 +40,7 @@
     "@storybook/builder-webpack5": "^7.0.18",
     "@storybook/manager-webpack5": "^6.5.16",
     "@storybook/react": "^7.0.18",
-    "@storybook/testing-library": "^0.1.0",
+    "@storybook/testing-library": "^0.2.0",
     "@testing-library/cypress": "^9.0.0",
     "@types/node": "^20.2.5",
     "@types/react": "^18.2.7",
