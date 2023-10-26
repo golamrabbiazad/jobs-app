@@ -13,10 +13,12 @@ type UseCreateJobOptions = {
 }
 
 export const useCreateJob = ({ onSuccess }: UseCreateJobOptions = {}) => {
-  const { mutate: submit, isLoading } = useMutation({
+  const { mutate: submit, isPending: isLoading } = useMutation({
     mutationFn: createJob,
     onSuccess: (job) => {
-      queryClient.invalidateQueries(['jobs'])
+      queryClient.invalidateQueries({
+        queryKey: ['jobs'],
+      })
       onSuccess?.(job)
     },
   })

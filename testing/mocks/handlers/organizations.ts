@@ -1,27 +1,32 @@
-import { rest } from 'msw'
+import { HttpResponse, delay, http } from 'msw'
 
 import { API_URL } from '@config/constants'
 import { db } from '../db'
 
-const singleOrganization = rest.get(
+const singleOrganization = http.get(
   `${API_URL}/organizations/:organizationId`,
-  async (req, res, ctx) => {
-    const organizationId = req.params.organizationId as string
+  async ({ params }) => {
+    const { organizationId } = params
+
+    if (!organizationId) {
+      return HttpResponse.json(null, { status: 404 })
+    }
 
     const organization = db.organization.findFirst({
       where: {
         id: {
-          equals: organizationId,
+          equals: organizationId as string,
         },
       },
     })
 
     if (!organization) {
-      return res(ctx.status(404), ctx.json({ message: 'Not found!' }))
+      return HttpResponse.json(null, { status: 404 })
     }
 
-    return res(ctx.delay(300), ctx.status(200), ctx.json(organization))
-  }
+    await delay(300)
+    return HttpResponse.json(organization, { status: 200 })
+  },
 )
 
 export const organizationsHandlers = [singleOrganization]

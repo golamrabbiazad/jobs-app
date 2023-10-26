@@ -12,7 +12,7 @@ type UseLogoutOptions = {
 }
 
 export const useLogout = ({ onSuccess }: UseLogoutOptions = {}) => {
-  const { mutate: submit, isLoading } = useMutation({
+  const { mutate: submit, isPending: isLoading } = useMutation({
     mutationFn: logout,
     onSuccess: () => {
       queryClient.clear()

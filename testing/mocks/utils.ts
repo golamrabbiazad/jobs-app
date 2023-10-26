@@ -1,4 +1,4 @@
-import { RestRequest } from 'msw'
+import { DefaultBodyType, HttpRequestParsedResult, StrictRequest } from 'msw'
 
 import { AuthUser } from '@features/auth'
 import { testData } from '@testing/testData'
@@ -60,16 +60,16 @@ export const authenticate = ({
 }
 
 export const requireAuth = ({
-  req,
+  request,
   shouldThrow = true,
 }: {
-  req: RestRequest
+  request: any
   shouldThrow?: boolean
 }) => {
   if (IS_TEST) {
     return getUser()
   } else {
-    const encodedToken = req.cookies[AUTH_COOKIE]
+    const encodedToken = request.cookies[AUTH_COOKIE]
 
     if (encodedToken !== AUTH_TOKEN) {
       if (shouldThrow) {

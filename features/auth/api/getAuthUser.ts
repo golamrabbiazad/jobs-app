@@ -8,7 +8,7 @@ export const getAuthUser = (): Promise<AuthUser> => {
 }
 
 export const useUser = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isPending: isLoading } = useQuery({
     queryKey: ['auth-user'],
     queryFn: () => getAuthUser(),
   })

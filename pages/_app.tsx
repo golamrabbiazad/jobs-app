@@ -15,7 +15,7 @@ type AppPropsWithLayout = AppProps & {
 }
 
 const MSWWrapper = dynamic<{ children: ReactNode }>(() =>
-  import('@lib/msw').then(({ MSWWrapper }) => MSWWrapper)
+  import('@lib/msw').then(({ MSWWrapper }) => MSWWrapper),
 )
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {

@@ -1,43 +1,46 @@
-import { rest } from 'msw'
+import { http, delay, HttpResponse } from 'msw'
 
 import { API_URL } from '@config/constants'
-import { authenticate, AUTH_COOKIE, requireAuth } from '../utils'
+import { authenticate, requireAuth } from '../utils'
 
-const signinHandler = rest.post(
+interface Credential {
+  email: string
+  password: string
+}
+
+const signinHandler = http.post(
   `${API_URL}/auth/login`,
-  async (req, res, ctx) => {
-    const credentials = await req.json()
+  async ({ request }) => {
+    const credentials = (await request.json()) as Credential
     const { user, jwt } = authenticate(credentials)
 
-    return res(
-      ctx.delay(300),
-      ctx.cookie(AUTH_COOKIE, jwt, {
+    await delay(300)
+
+    return new HttpResponse(JSON.stringify({ user }), {
+      headers: {
+        'auth-token': jwt,
         path: '/',
-        httpOnly: true,
-      }),
-      ctx.json(JSON.stringify({ user }))
-    )
-  }
+      },
+    })
+  },
 )
 
-const signoutHandler = rest.post(
-  `${API_URL}/auth/logout`,
-  async (req, res, ctx) => {
-    return res(
-      ctx.delay(300),
-      ctx.cookie(AUTH_COOKIE, '', {
-        path: '/',
-        httpOnly: true,
-      }),
-      ctx.json({ success: true })
-    )
-  }
-)
+const signoutHandler = http.post(`${API_URL}/auth/logout`, async () => {
+  await delay(300)
+  return new HttpResponse(JSON.stringify({ success: true }), {
+    headers: {
+      'auth-token': '',
+      path: '/',
+    },
+  })
+})
 
-const meHandler = rest.get(`${API_URL}/auth/me`, async (req, res, ctx) => {
-  const user = requireAuth({ req, shouldThrow: false })
+const meHandler = http.get(`${API_URL}/auth/me`, async ({ request }) => {
+  const user = requireAuth({ request, shouldThrow: false })
 
-  return res(ctx.delay(300), ctx.json(user))
+  await delay(300)
+
+  return HttpResponse.json(user)
 })
 
 export const authHandlers = [signinHandler, signoutHandler, meHandler]

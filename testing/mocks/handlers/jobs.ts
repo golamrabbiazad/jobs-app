@@ -1,11 +1,14 @@
-import { rest } from 'msw'
+import { HttpResponse, delay, http } from 'msw'
 
 import { API_URL } from '@config/constants'
 import { db } from '../db'
 import { requireAuth } from '../utils'
 
-const allJobs = rest.get(`${API_URL}/jobs`, async (req, res, ctx) => {
-  const organizationId = req.url.searchParams.get('organizationId') as string
+const allJobs = http.get(`${API_URL}/jobs`, async ({ request }) => {
+  const organizationId = new URL(request.url).searchParams.get('organizationId')
+  if (!organizationId) {
+    return HttpResponse.json(null, { status: 404 })
+  }
   const jobs = db.job.findMany({
     where: {
       organizationId: {
@@ -14,41 +17,50 @@ const allJobs = rest.get(`${API_URL}/jobs`, async (req, res, ctx) => {
     },
   })
 
-  return res(ctx.delay(300), ctx.status(200), ctx.json(jobs))
+  await delay(300)
+
+  return HttpResponse.json(jobs, { status: 200 })
 })
 
-const postJob = rest.post(`${API_URL}/jobs`, async (req, res, ctx) => {
-  const user = requireAuth({ req })
-  const jobData = await req.json()
+interface Job {
+  position: string
+  location: string
+  department: string
+  info: string
+}
+
+const postJob = http.post(`${API_URL}/jobs`, async ({ request }) => {
+  const user = requireAuth({ request })
+  const jobData = await request.json()
 
   const job = db.job.create({
-    ...jobData,
+    ...(jobData as Job),
     organizationId: user?.organizationId,
   })
 
-  return res(ctx.delay(300), ctx.status(201), ctx.json(job))
+  await delay(300)
+
+  return HttpResponse.json(job, { status: 201 })
 })
 
-const singleJob = rest.get(`${API_URL}/jobs/:jobId`, (req, res, ctx) => {
-  const jobId = req.params.jobId as string
+const singleJob = http.get(`${API_URL}/jobs/:jobId`, async ({ params }) => {
+  const { jobId } = params
 
   const job = db.job.findFirst({
     where: {
       id: {
-        equals: jobId,
+        equals: jobId as string,
       },
     },
   })
 
   if (!job) {
-    return res(
-      ctx.delay(300),
-      ctx.status(404),
-      ctx.json({ message: 'Not found!' })
-    )
+    return HttpResponse.json(null, { status: 404 })
   }
 
-  return res(ctx.delay(300), ctx.status(200), ctx.json(job))
+  await delay(300)
+
+  return HttpResponse.json(job, { status: 200 })
 })
 
 export const jobsHandlers = [allJobs, singleJob, postJob]

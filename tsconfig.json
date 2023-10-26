@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,50 +16,20 @@
     "incremental": true,
     "baseUrl": "./",
     "paths": {
-      "@assets/*": [
-        "assets/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@config/*": [
-        "config/*"
-      ],
-      "@features/*": [
-        "features/*"
-      ],
-      "@layouts/*": [
-        "layouts/*"
-      ],
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@prisma/*": [
-        "prisma/*"
-      ],
-      "@providers/*": [
-        "providers/*"
-      ],
-      "@stores/*": [
-        "stores/*"
-      ],
-      "@types": [
-        "types"
-      ],
-      "@testing/*": [
-        "testing/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ]
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@config/*": ["config/*"],
+      "@features/*": ["features/*"],
+      "@layouts/*": ["layouts/*"],
+      "@lib/*": ["lib/*"],
+      "@prisma/*": ["prisma/*"],
+      "@providers/*": ["providers/*"],
+      "@stores/*": ["stores/*"],
+      "@types": ["types"],
+      "@testing/*": ["testing/*"],
+      "@utils/*": ["utils/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

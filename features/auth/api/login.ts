@@ -5,7 +5,7 @@ import { queryClient } from '@lib/reactQuery'
 import { AuthUser, LoginData } from '../types'
 
 export const login = (
-  data: LoginData
+  data: LoginData,
 ): Promise<{
   user: AuthUser
 }> => {
@@ -17,7 +17,7 @@ type UseLoginOptions = {
 }
 
 export const useLogin = ({ onSuccess }: UseLoginOptions = {}) => {
-  const { mutate: submit, isLoading } = useMutation({
+  const { mutate: submit, isPending: isLoading } = useMutation({
     mutationFn: login,
     onSuccess: ({ user }) => {
       queryClient.setQueryData(['auth-user'], user)
